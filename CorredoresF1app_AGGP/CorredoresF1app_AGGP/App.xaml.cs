@@ -11,7 +11,7 @@ namespace CorredoresF1app_AGGP
         {
             InitializeComponent();
 
-            MainPage = new DriverView();
+            MainPage = new NavigationPage(new Areas());
         }
 
         protected override void OnStart()

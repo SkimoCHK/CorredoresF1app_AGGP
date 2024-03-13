@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CorredoresF1app_AGGP.View.Areas">
+    <ContentPage.Content>
+        <Grid RowDefinitions="60, *"
+          BackgroundColor="White">
+            <Label Text="JARDINES"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="40"
+               FontAttributes="Bold"
+               TextColor="#35424a"/>
+            <CollectionView BackgroundColor="#EAEDEC" 
+                        Grid.Row="1"
+                        ItemsSource="{Binding ListaAreas}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                 Span="1"
+                                 VerticalItemSpacing="30"
+                                 HorizontalItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame WidthRequest="280"
+                           HeightRequest="150"
+                           HorizontalOptions="Center"
+                           CornerRadius="15"
+                           Margin="15"
+                           BackgroundColor="#5f765f">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding VerDetalleCommand}" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <Grid>
+                                <Image Source="{Binding Imagen}"
+                                   Aspect="AspectFill"
+                                   HeightRequest="100"/>
+                                <Label Text="{Binding Nombre}"
+                                   VerticalOptions="End"
+                                   HorizontalOptions="CenterAndExpand"
+                                   TextColor="White"
+                                   FontSize="14"
+                                   Margin="0,0,0,-19"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="+" 
+                Grid.Row="1"
+                HeightRequest="100"
+                WidthRequest="100"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                CornerRadius="50"
+                Margin="15"
+                FontSize="50"
+                FontAttributes="Bold"
+                BackgroundColor="#5f765f"
+                Command="{Binding AgregarJardinCommand}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,76 @@
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Net.Http;
+using CorredoresF1app_AGGP.Model;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
+
+namespace CorredoresF1app_AGGP.ViewModel
+{
+    public class AreasViewModel : BaseViewModel
+    {
+
+        #region VARIABLES
+        private ObservableCollection<Area> _listaAreas;
+        #endregion
+
+        #region CONSTRUCTOR
+        public AreasViewModel(INavigation navigation)
+        {
+            Navigation = navigation;
+            ObtenerLista();
+        }
+        #endregion
+
+        #region OBJETOS
+        public ObservableCollection<Area> ListaAreas
+        {
+            get { return _listaAreas; }
+            set
+            {
+                SetValue(ref _listaAreas, value);
+                OnpropertyChanged();
+            }
+
+        }
+        #endregion
+
+        #region PROCESOS
+        public async Task ObtenerLista()
+        {
+            //http://www.aquasmart.somee.com/api/Area
+            Uri RequestUri = new Uri("http://www.aquasmart.somee.com/api/Area");
+            var client = new HttpClient();
+            var response = await client.GetAsync(RequestUri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                ListaAreas = JsonConvert.DeserializeObject<ObservableCollection<Area>>(content);
+            }
+            else
+            {
+                await DisplayAlert("Mensaje", "Error al cargar la lista de areas", "Ok");
+            }
+        }
+        public void ProcesoSimple()
+        {
+
+        }
+        public void ProcesoSimple2()
+        {
+
+        }
+        #endregion
+
+        #region COMANDOS
+        public ICommand VerDetalleCommand => new Command(ProcesoSimple);
+        public ICommand AgregarJardinCommand => new Command(ProcesoSimple2);
+        #endregion
+
+    }
+}
