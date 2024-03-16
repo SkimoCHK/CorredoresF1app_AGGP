@@ -6,6 +6,8 @@ using System.Net.Http;
 using CorredoresF1app_AGGP.Model;
 using System.Text;
 using System.Threading.Tasks;
+using CorredoresF1app_AGGP.View;
+using CorredoresF1app_AGGP.ViewModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -23,6 +25,16 @@ namespace CorredoresF1app_AGGP.ViewModel
         {
             Navigation = navigation;
             ObtenerLista();
+
+            MessagingCenter.Subscribe<VMCrearArea>(this, "ActualizarListaAreas", async (sender) =>
+            {
+                await ObtenerLista();
+            });
+
+            MessagingCenter.Subscribe<VMeditarArea>(this, "ActualizarListaAreas", async (sender) =>
+            {
+                await ObtenerLista();
+            });
         }
         #endregion
 
@@ -59,17 +71,23 @@ namespace CorredoresF1app_AGGP.ViewModel
         }
         public void ProcesoSimple()
         {
-
+            
         }
-        public void ProcesoSimple2()
+        public async Task CrearAreas()
         {
-
+            await Navigation.PushAsync(new CrearArea());
         }
+
+        public async Task EditarArea(Area area)
+        {
+            await Navigation.PushAsync(new EditarArea(area));
+        }
+
         #endregion
 
         #region COMANDOS
-        public ICommand VerDetalleCommand => new Command(ProcesoSimple);
-        public ICommand AgregarJardinCommand => new Command(ProcesoSimple2);
+        public ICommand AgregarJardinCommand => new Command(async () => await CrearAreas());
+        public ICommand VerDetalleCommand => new Command<Area>(async (a) => await EditarArea(a));
         #endregion
 
     }

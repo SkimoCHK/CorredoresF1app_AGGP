@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CorredoresF1app_AGGP.View.EditarArea">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand"
+                 Spacing="15"
+                 Padding="20"
+                 BackgroundColor="White">
+
+                <BoxView HeightRequest="3"
+                 BackgroundColor="#5f765f"
+                 HorizontalOptions="FillAndExpand" Margin="0,2,0,0" />
+
+                <Label Text="Nombre del área"
+               FontSize="18"
+               TextColor="#35424a"
+               HorizontalOptions="Start" />
+
+                <Entry Placeholder="Ingrese el nombre del área"
+               FontSize="16"
+               TextColor="Black"
+               HorizontalOptions="FillAndExpand"
+               x:Name="NombreAreaEntry"
+               Text="{Binding Nombre}"/>
+
+                <Label Text="URL de la imagen del área"
+               FontSize="18"
+               TextColor="#35424a"
+               HorizontalOptions="Start"
+               VerticalOptions="Start" 
+               />
+
+                <Entry Placeholder="Ingrese la URL de la imagen"
+               FontSize="16"
+               TextColor="Black"
+               HorizontalOptions="FillAndExpand"
+               x:Name="URLImagenEntry"
+               Text="{Binding Imagen}"/>
+
+
+
+                <Button Text="Asignar Actuador"
+                BackgroundColor="#5f765f"
+                TextColor="White"
+                Command="{Binding MostrarActuadoresCommand}"/>
+                <Picker x:Name="ElectroValvulasPicker" IsVisible="{Binding VerActuadores}"
+                Title="Seleccionar electroválvula"
+                TitleColor="#5f765f"
+                TextColor="#5f765f"
+                BackgroundColor="White"
+                Background="White"
+                FontSize="16"
+                ItemsSource="{Binding ListaValvulas}"
+                ItemDisplayBinding="{Binding Nombre}" 
+                SelectedItem="{Binding Valvula}"/>
+
+
+                <Button Text="Asignar Sensor"
+                BackgroundColor="#5f765f"
+                BorderColor="Pink"
+                TextColor="White"
+                Command="{Binding MostrarSensoresCommand}"/>
+                <Picker x:Name="SensoresPicker" IsVisible="{Binding VerSensores}"
+                Title="Seleccionar sensor"
+                TitleColor="#5f765f"
+                BackgroundColor="White"
+                TextColor="#5f765f"
+                FontSize="16"
+                ItemsSource="{Binding ListaSensores}"
+                ItemDisplayBinding="{Binding Nombre}"
+                SelectedItem="{Binding Sensor}"/>
+
+                <Button Text="CREAR AREA"
+            TranslationY="100"
+            BackgroundColor="#5f765f"
+            TextColor="White"
+            Command="{Binding Crearcommand}"
+          />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
