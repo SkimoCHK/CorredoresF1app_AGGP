@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -16,6 +15,13 @@ namespace CorredoresF1app_AGGP.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            //PARA EL MAPITA
+            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState);
+
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NBaF5cXmZCfUx0RXxbf1x0ZFBMZFRbRHdPMyBoS35RckVgWHhecnRUQmZaWExx");
+
+
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

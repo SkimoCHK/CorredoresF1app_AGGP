@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CorredoresF1app_AGGP.View.EditarArea">
+             x:Class="CorredoresF1app_AGGP.View.EditarArea" NavigationPage.HasBackButton="False">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout VerticalOptions="FillAndExpand"
@@ -16,28 +16,27 @@
                 <Label Text="Nombre del área"
                FontSize="18"
                TextColor="#35424a"
-               HorizontalOptions="Start" />
+               HorizontalOptions="Start" FontAttributes="Bold"/>
 
                 <Entry Placeholder="Ingrese el nombre del área"
                FontSize="16"
                TextColor="Black"
                HorizontalOptions="FillAndExpand"
                x:Name="NombreAreaEntry"
-               Text="{Binding Nombre}"/>
+               Text="{Binding Nombre}" PlaceholderColor="Black"/>
 
                 <Label Text="URL de la imagen del área"
                FontSize="18"
                TextColor="#35424a"
                HorizontalOptions="Start"
-               VerticalOptions="Start" 
-               />
+               VerticalOptions="Start" FontAttributes="Bold"/>
 
                 <Entry Placeholder="Ingrese la URL de la imagen"
                FontSize="16"
                TextColor="Black"
                HorizontalOptions="FillAndExpand"
                x:Name="URLImagenEntry"
-               Text="{Binding Imagen}"/>
+               Text="{Binding Imagen}" PlaceholderColor="Black"/>
 
 
 
@@ -73,11 +72,11 @@
                 SelectedItem="{Binding Sensor}"/>
 
                 <Button Text="CREAR AREA"
-            TranslationY="100"
-            BackgroundColor="#5f765f"
-            TextColor="White"
-            Command="{Binding Crearcommand}"
-          />
+                TranslationY="100"
+                 BackgroundColor="#5f765f"
+                 TextColor="White"
+                 Command="{Binding Crearcommand}"
+                    />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -11,7 +11,8 @@ namespace CorredoresF1app_AGGP
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Areas());
+            //MainPage = new NavigationPage(new Areas());
+            MainPage = new NavigationPage(new Login());
         }
 
         protected override void OnStart()

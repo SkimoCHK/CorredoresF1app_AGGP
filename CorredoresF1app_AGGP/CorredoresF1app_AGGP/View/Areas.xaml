@@ -9,7 +9,7 @@
                 <Label Text="Áreas Verdes"
                    FontSize="28"
                    FontAttributes="Bold"
-                   TextColor="#35424a"
+                   TextColor="#5f765f"
                    HorizontalOptions="Start" />
 
                 <BoxView HeightRequest="1"

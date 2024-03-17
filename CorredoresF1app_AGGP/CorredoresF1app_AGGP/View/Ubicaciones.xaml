@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             x:Class="CorredoresF1app_AGGP.View.Ubicaciones"
+             NavigationPage.IconColor="Black" BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView BackgroundColor="White">
+                <StackLayout VerticalOptions="Start"
+                         Spacing="10"
+                         Padding="10" BackgroundColor="Transparent">
+
+                    <Label Text="Zonas de Riego"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#5f765f"
+                       HorizontalOptions="Start"/>
+                    <BoxView HeightRequest="1"
+                         BackgroundColor="#5f765f"
+                         HorizontalOptions="FillAndExpand" />
+
+                    <!-- Puedes añadir más elementos aquí -->
+
+                </StackLayout>
+            </ScrollView>
+            <maps:Map x:Name="MapView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" InitialCameraUpdate="27.366736, -109.931755, 18" />
+
+            <StackLayout Spacing="15" Padding="20" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                <Button BackgroundColor="#5f765f" HorizontalOptions="EndAndExpand" VerticalOptions="Center" HeightRequest="50" Text="ZONAS" Clicked="Street_OnClicked"  CornerRadius="25"/>
+                <Button BackgroundColor="#5f765f" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="50" Text="HIBRIDO" Clicked="Hybrid_OnClicked" CornerRadius="25"/>
+                <Button BackgroundColor="#5f765f" HorizontalOptions="StartAndExpand" VerticalOptions="Center" HeightRequest="50" Text="SATELITE" Clicked="Satellite_OnClicked" CornerRadius="25"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
