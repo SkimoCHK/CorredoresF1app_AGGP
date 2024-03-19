@@ -25,19 +25,18 @@
                        x:Name="NombreAreaEntry"
                        Text="{Binding Nombre}"/>
 
-                <Label Text="URL de la imagen del área"
+                <Label Text="Seleccione una imagen"
                        FontSize="18"
                        TextColor="#35424a"
                        HorizontalOptions="Start"
                        VerticalOptions="Start" 
                        />
 
-                <Entry Placeholder="Ingrese la URL de la imagen"
-                       FontSize="16"
-                       TextColor="Black"
-                       HorizontalOptions="FillAndExpand"
-                       x:Name="URLImagenEntry"
-                       Text="{Binding Imagen}"/>
+                <Button Text="Seleccionar"
+                    BackgroundColor="#5f765f"
+                    TextColor="White"
+                    Command="{Binding SeleccionarImagenCommand}" /> 
+
 
 
 

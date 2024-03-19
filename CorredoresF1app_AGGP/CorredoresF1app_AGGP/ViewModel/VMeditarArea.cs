@@ -4,10 +4,12 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CorredoresF1app_AGGP.ViewModel
@@ -154,6 +156,31 @@ namespace CorredoresF1app_AGGP.ViewModel
             ObtenerValvulas();
             ObtenerSensores();
         }
+        private async Task SeleccionarImagen()
+        {
+            try
+            {
+                var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
+                {
+                    Title = "Seleccionar imagen"
+                });
+
+                if (result != null)
+                {
+                    var stream = await result.OpenReadAsync();
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        stream.CopyTo(ms);
+                        Imagen = Convert.ToBase64String(ms.ToArray());
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
 
         public async Task EditarArea()
         {
@@ -197,6 +224,37 @@ namespace CorredoresF1app_AGGP.ViewModel
                 await DisplayAlert("Error", ex.Message, "Ok");
             }
         }
+        public async Task Eliminar()
+        {
+            try
+            {
+                var confirmarEliminar = await DisplayAlert("Confirmar", "¿Estás seguro de que deseas eliminar esta área?", "Sí", "No");
+                if (confirmarEliminar)
+                {
+                    var requestUri = "http://www.aquasmart.somee.com/api/Area/" + Id;
+                    var client = new HttpClient();
+                    var response = await client.DeleteAsync(requestUri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await DisplayAlert("Mensaje", "Área eliminada correctamente", "Ok");
+                        MessagingCenter.Send(this, "ActualizarListaAreas");
+                        await Volver();
+                    }
+                    else
+                    {
+                        await DisplayAlert("Mensaje", "Error al eliminar el área", "Ok");
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("MENSAJE", "No estes chingando entonces pendejo", "vales verga");
+                }
+            }
+            catch(Exception ex)
+            {
+                await DisplayAlert("Error", $"error al eliminar{ex.Message}", "Ok");
+            } 
+        }
 
 
         private void MostrarSensores()
@@ -218,9 +276,12 @@ namespace CorredoresF1app_AGGP.ViewModel
 
 
         #region COMANDOS
+        public ICommand SeleccionarImagenCommand => new Command(async () => await SeleccionarImagen());
         public ICommand MostrarSensoresCommand => new Command(MostrarSensores);
         public ICommand MostrarActuadoresCommand => new Command(MostrarActuadores);
         public ICommand Crearcommand => new Command(async () => await EditarArea());
+
+        public ICommand Deletecommand => new Command(async () => await Eliminar());
 
         #endregion
 

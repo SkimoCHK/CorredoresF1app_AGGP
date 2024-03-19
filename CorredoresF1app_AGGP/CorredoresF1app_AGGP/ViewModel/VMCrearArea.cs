@@ -9,6 +9,8 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Windows.Input;
 using CorredoresF1app_AGGP.View;
+using System.IO;
+using Xamarin.Essentials;
 
 namespace CorredoresF1app_AGGP.ViewModel
 {
@@ -148,11 +150,8 @@ namespace CorredoresF1app_AGGP.ViewModel
 
         public async Task InsertarArea()
         {
-            string idSensor = Sensor.Id;
-            string idValvula = Valvula.Id;
             try
             {
-                
                 AreaDTO nuevaArea = new AreaDTO()
                 {
                     Nombre = Nombre,
@@ -161,18 +160,14 @@ namespace CorredoresF1app_AGGP.ViewModel
                     refValvula = Valvula.Id,
                 };
 
-               
                 var json = JsonConvert.SerializeObject(nuevaArea);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                
                 var requestUri = "http://www.aquasmart.somee.com/api/Area";
 
-                
                 var client = new HttpClient();
                 var response = await client.PostAsync(requestUri, content);
 
-                
                 if (response.IsSuccessStatusCode)
                 {
                     await DisplayAlert("Mensaje", "Área insertada correctamente", "Ok");
@@ -181,7 +176,8 @@ namespace CorredoresF1app_AGGP.ViewModel
                 }
                 else
                 {
-                    await DisplayAlert("Mensaje", "Error al insertar el área", "Ok");
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    await DisplayAlert("Error", $"Error al insertar el área: {response.StatusCode} - {errorMessage}", "Ok");
                 }
             }
             catch (Exception ex)
@@ -189,6 +185,7 @@ namespace CorredoresF1app_AGGP.ViewModel
                 await DisplayAlert("Error", ex.Message, "Ok");
             }
         }
+
 
 
         private void MostrarSensores()
@@ -205,11 +202,38 @@ namespace CorredoresF1app_AGGP.ViewModel
             Navigation.PopAsync();
         }
 
+        private async Task SeleccionarImagen()
+        {
+            try
+            {
+                var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
+                {
+                    Title = "Seleccionar imagen"
+                });
+
+                if (result != null)
+                {
+                    var stream = await result.OpenReadAsync();
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        stream.CopyTo(ms);
+                        Imagen = Convert.ToBase64String(ms.ToArray());
+                       
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
 
         #endregion
 
 
         #region COMANDOS
+        public ICommand SeleccionarImagenCommand => new Command(async () => await SeleccionarImagen());
+
         public ICommand MostrarSensoresCommand => new Command(MostrarSensores);
         public ICommand MostrarActuadoresCommand => new Command(MostrarActuadores);
         public ICommand Crearcommand => new Command(async () => await InsertarArea());

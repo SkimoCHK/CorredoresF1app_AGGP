@@ -1,5 +1,6 @@
 ﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:CorredoresF1app_AGGP.Converters"
              x:Class="CorredoresF1app_AGGP.View.Areas"
              NavigationPage.IconColor="Black" BackgroundColor="White">
     <ContentPage.Content>
@@ -36,9 +37,11 @@
                                         <TapGestureRecognizer Command="{Binding Path=BindingContext.VerDetalleCommand, Source={x:Reference AreasCollection}}" CommandParameter="{Binding .}" />
                                     </Frame.GestureRecognizers>
                                     <Grid>
-                                        <Image Source="{Binding Imagen}"
-                                           Aspect="AspectFill"
-                                           HeightRequest="100"/>
+                                        <Image Source="{Binding Imagen, Converter={StaticResource Base64ToImageSourceConverter}}"
+                                                       Aspect="AspectFill"
+                                                       HeightRequest="100"/>
+
+
                                         <Label Text="{Binding Nombre}"
                                            VerticalOptions="End"
                                            HorizontalOptions="CenterAndExpand"

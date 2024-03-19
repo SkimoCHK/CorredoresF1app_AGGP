@@ -25,18 +25,21 @@
                x:Name="NombreAreaEntry"
                Text="{Binding Nombre}" PlaceholderColor="Black"/>
 
-                <Label Text="URL de la imagen del área"
+                <Label Text="Imagen actual"
                FontSize="18"
                TextColor="#35424a"
                HorizontalOptions="Start"
                VerticalOptions="Start" FontAttributes="Bold"/>
 
-                <Entry Placeholder="Ingrese la URL de la imagen"
-               FontSize="16"
-               TextColor="Black"
-               HorizontalOptions="FillAndExpand"
-               x:Name="URLImagenEntry"
-               Text="{Binding Imagen}" PlaceholderColor="Black"/>
+                <Image Source="{Binding Imagen, Converter={StaticResource Base64ToImageSourceConverter}}"
+               Aspect="AspectFill"
+               HeightRequest="100"/>
+
+                <Button Text="Editar Imagen"
+                    BackgroundColor="#5f765f"
+                    TextColor="White"
+                    Command="{Binding SeleccionarImagenCommand}" />
+
 
 
 
@@ -71,12 +74,23 @@
                 ItemDisplayBinding="{Binding Nombre}"
                 SelectedItem="{Binding Sensor}"/>
 
-                <Button Text="CREAR AREA"
+                <Button Text="EDITAR AREA"
                 TranslationY="100"
                  BackgroundColor="#5f765f"
                  TextColor="White"
                  Command="{Binding Crearcommand}"
-                    />
+                 Margin="90,0"
+                 TranslationX="-100"
+                 CornerRadius="1000"/>
+
+                <Button Text="ELIMINAR AREA"
+                TranslationY="37"
+                TranslationX="100"
+                 BackgroundColor="DarkRed"
+                 TextColor="White"
+                 Margin="90,0"
+                 CornerRadius="1000"
+                   Command="{Binding Deletecommand}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
