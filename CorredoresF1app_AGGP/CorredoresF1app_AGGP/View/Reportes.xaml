@@ -24,11 +24,13 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+
                     </Grid.RowDefinitions>
 
                     <!--<Label Text="Progreso de riego"
@@ -53,7 +55,8 @@
 
                     <!--Using linear progress bar-->
                     <!--<progressBar:SfLinearProgressBar Progress="64" Grid.Column="1" Grid.Row="3"/>-->
-                    <progressBar:SfCircularProgressBar  Progress="64" Grid.Column="1" Grid.Row="1" ProgressColor="#7fe1ad" AnimationDuration="5000">
+                    <Button Command="{Binding ActualizarCommand}" BackgroundColor="Transparent" Grid.ColumnSpan="2" Grid.RowSpan="2" TranslationX="60" TranslationY="40"  />
+                    <progressBar:SfCircularProgressBar  Progress="{Binding Porcentaje}" Grid.Column="1" Grid.Row="1" ProgressColor="#7fe1ad" AnimationDuration="5000">
                         <progressBar:SfCircularProgressBar.Scale>
                             <OnIdiom x:TypeArguments="x:Double">
                                 <OnIdiom.Phone>2.5</OnIdiom.Phone>
@@ -90,58 +93,28 @@
                  Grid.Row="5"
                     VerticalOptions="Center" HorizontalOptions="Center"
                        Margin="5,0,0,0"/>
-
                     <!--<BoxView BackgroundColor="#5f765f" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="1" Grid.Row="7" VerticalOptions="FillAndExpand" HeightRequest="1"/>-->
                     <!--<Frame Grid.Column="0" Grid.Row="7" HeightRequest="1" WidthRequest="3" BackgroundColor="Transparent" BorderColor="#5f765f" HasShadow="False" Grid.ColumnSpan="3" Grid.RowSpan="1"/>-->
 
-
-                    <Label Text="Jardin Biblioteca"
-               FontSize="16"
-                FontAttributes="None"
-                TextColor="#394d69"
-                Grid.Column="0"
-                 Grid.Row="7"
-                 Margin="3,3,0,1"
-                 VerticalOptions="CenterAndExpand" HorizontalOptions="Center" CharacterSpacing="0"/>
-                    <Label Text="ON"
-                  FontSize="16"
-                    FontAttributes="None"
-                   TextColor="#394d69"
-                   Grid.Column="2"
-                  Grid.Row="7"
-                VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
-
-                    <Label Text="Jardin Entrada"
-                    FontSize="16"
-                     FontAttributes="None"
-                    TextColor="#394d69"
-                    Grid.Column="0"
-                     Grid.Row="8"
-                VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
-                    <Label Text="ON"
-                     FontSize="16"
-                     FontAttributes="None"
-                 TextColor="#394d69"
-                    Grid.Column="2"
-                  Grid.Row="8"
-                VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
-
-
-                    <Label Text="Jardin Central"
-                FontSize="16"
-                 FontAttributes="None"
-                        TextColor="#394d69"
-                     Grid.Column="0"
-                    Grid.Row="9"
-                    VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
-                    <Label Text="ON"
-                    FontSize="16"
-                         FontAttributes="None"
-                     TextColor="#394d69"
-                     Grid.Column="2"
-                         Grid.Row="9"
-                    VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
                 </Grid>
+                <ListView ItemsSource="{Binding ListaAreas}" x:Name="statusAreas" VerticalOptions="FillAndExpand"  BackgroundColor="Transparent">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout TranslationX="50" Padding="10" BackgroundColor="White" Margin="5,0,5,10">
+                                    <Label Text="{Binding Nombre}"
+                                               FontSize="18"
+                                               TextColor="#35424a"
+                                               HorizontalOptions="StartAndExpand" />
+                                    <Label Text="{Binding Nombre}"
+                                           FontSize="18"
+                                           TextColor="Black"
+                                           HorizontalOptions="StartAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

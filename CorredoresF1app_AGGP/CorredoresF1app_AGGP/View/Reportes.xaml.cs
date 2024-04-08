@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CorredoresF1app_AGGP.ViewModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace CorredoresF1app_AGGP.View
         public Reportes()
         {
             InitializeComponent();
+            BindingContext = new VMReportes(Navigation);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace CorredoresF1app_AGGP.ViewModel
 
         #region VARIABLES
         private ObservableCollection<Area> _listaAreas;
+        private bool boleanoxd = true;
         #endregion
 
         #region CONSTRUCTOR
@@ -39,6 +40,11 @@ namespace CorredoresF1app_AGGP.ViewModel
         #endregion
 
         #region OBJETOS
+        public bool Booleanoxdd
+        {
+            get { return boleanoxd; } 
+            set { SetValue(ref boleanoxd, value); }
+        }
         public ObservableCollection<Area> ListaAreas
         {
             get { return _listaAreas; }
