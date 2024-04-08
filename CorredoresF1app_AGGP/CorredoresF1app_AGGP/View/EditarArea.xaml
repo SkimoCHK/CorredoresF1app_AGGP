@@ -74,18 +74,26 @@
                 ItemDisplayBinding="{Binding Nombre}"
                 SelectedItem="{Binding Sensor}"/>
 
-                <Button Text="EDITAR AREA"
-                TranslationY="100"
+                <Button Text="Historial"
+                    BackgroundColor="#5f765f"
+                    TextColor="White"
+                    Command="{Binding Historialcommand}"
+                 />
+
+                <Button Text="EDITAR"
+                 TranslationY="58"
+                 TranslationX="-100"
                  BackgroundColor="#5f765f"
                  TextColor="White"
                  Command="{Binding Crearcommand}"
                  Margin="90,0"
-                 TranslationX="-100"
                  CornerRadius="1000"/>
+                
+                
 
-                <Button Text="ELIMINAR AREA"
-                TranslationY="37"
-                TranslationX="100"
+                <Button Text="ELIMINAR"
+                 TranslationY="-5"
+                 TranslationX="100"
                  BackgroundColor="DarkRed"
                  TextColor="White"
                  Margin="90,0"

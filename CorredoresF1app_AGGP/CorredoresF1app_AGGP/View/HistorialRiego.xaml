@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CorredoresF1app_AGGP.View.HistorialRiego" BackgroundColor="White" NavigationPage.IconColor="Black">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="20">
+            <Label Text="Historial de Riego"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#35424a"
+                   HorizontalOptions="CenterAndExpand" />
+
+            <BoxView HeightRequest="1"
+                     BackgroundColor="#5f765f"
+                     HorizontalOptions="FillAndExpand" />
+
+            <ListView  ItemsSource="{Binding Historial}" x:Name="historialListView" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout TranslationX="50" Padding="10" BackgroundColor="White" Margin="5,0,5,10">
+                                <Label Text="{Binding Fecha}"
+                                       FontSize="18"
+                                       TextColor="#35424a"
+                                       HorizontalOptions="StartAndExpand" />
+                                <Label Text="{Binding Duracion, StringFormat='Hora: {0} AM - 09:30 AM'}"
+                                       FontSize="14"
+                                       TextColor="#808080"
+                                       HorizontalOptions="StartAndExpand" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
