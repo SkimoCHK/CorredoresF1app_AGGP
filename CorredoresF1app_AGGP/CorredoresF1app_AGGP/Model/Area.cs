@@ -18,6 +18,8 @@ namespace CorredoresF1app_AGGP.Model
         public string IdValvula { get; set; } = string.Empty;
 
         public ElectroValvula electroValvula { get; set; } = null;
+        public string EstadoElectroValvula => electroValvula.Abierta ? "ON" : "OFF";
+
 
         public string Imagen { get; set; } = string.Empty;
 

@@ -24,7 +24,6 @@ namespace CorredoresF1app_AGGP.ViewModel
         {
             Navigation = navigation;
             ObtenerPorcentaje();
-            ObtenerLista();
         }
         #endregion
 
@@ -62,7 +61,7 @@ namespace CorredoresF1app_AGGP.ViewModel
             {
                 await DisplayAlert("Mensaje", "Eror al obtener el porcentaje", "Ok");
             }
-            
+            ObtenerLista();
         }
 
         public async Task ObtenerLista()

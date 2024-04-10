@@ -11,6 +11,7 @@ using System.Windows.Input;
 using CorredoresF1app_AGGP.View;
 using System.IO;
 using Xamarin.Essentials;
+using SkiaSharp;
 
 namespace CorredoresF1app_AGGP.ViewModel
 {
@@ -49,7 +50,7 @@ namespace CorredoresF1app_AGGP.ViewModel
             set
             {
                 _listaAreas = value;
-                OnPropertyChanged(); 
+                OnPropertyChanged();
             }
         }
 
@@ -75,7 +76,7 @@ namespace CorredoresF1app_AGGP.ViewModel
             set { SetValue(ref _Sensor, value); }
         }
 
-        public ObservableCollection<ElectroValvula > ListaValvulas
+        public ObservableCollection<ElectroValvula> ListaValvulas
         {
             get { return _listaValvulas; }
             set
@@ -88,10 +89,10 @@ namespace CorredoresF1app_AGGP.ViewModel
         public ObservableCollection<SensorHumedad> ListaSensores
         {
             get { return _listaSensores; }
-            set 
+            set
             {
                 SetValue(ref _listaSensores, value);
-                OnpropertyChanged();   
+                OnpropertyChanged();
             }
         }
         public bool VerSensores
@@ -140,7 +141,7 @@ namespace CorredoresF1app_AGGP.ViewModel
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                ListaSensores = JsonConvert.DeserializeObject<ObservableCollection<SensorHumedad>>(content); 
+                ListaSensores = JsonConvert.DeserializeObject<ObservableCollection<SensorHumedad>>(content);
             }
             else
             {
@@ -216,9 +217,8 @@ namespace CorredoresF1app_AGGP.ViewModel
                     var stream = await result.OpenReadAsync();
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        stream.CopyTo(ms);
+                        await RedimensionarImagen(stream, ms, 854, 480); // Redimensionar a 480p
                         Imagen = Convert.ToBase64String(ms.ToArray());
-                       
                     }
                 }
             }
@@ -227,6 +227,48 @@ namespace CorredoresF1app_AGGP.ViewModel
                 await DisplayAlert("Error", ex.Message, "OK");
             }
         }
+
+        private async Task RedimensionarImagen(Stream imagenOriginal, Stream imagenRedimensionada, int ancho, int alto)
+        {
+            try
+            {
+                using (SKBitmap bitmap = SKBitmap.Decode(imagenOriginal))
+                {
+                    int nuevoAncho, nuevoAlto;
+
+                    if (bitmap.Width > bitmap.Height)
+                    {
+                        nuevoAncho = ancho;
+                        nuevoAlto = bitmap.Height * ancho / bitmap.Width;
+                    }
+                    else
+                    {
+                        nuevoAlto = alto;
+                        nuevoAncho = bitmap.Width * alto / bitmap.Height;
+                    }
+
+                    using (SKBitmap resizedBitmap = bitmap.Resize(new SKImageInfo(nuevoAncho, nuevoAlto), SKFilterQuality.High))
+                    {
+                        using (SKImage imageResized = SKImage.FromBitmap(resizedBitmap))
+                        {
+                            using (SKData data = imageResized.Encode())
+                            {
+                                using (Stream output = data.AsStream())
+                                {
+                                    await output.CopyToAsync(imagenRedimensionada);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al redimensionar la imagen: {ex.Message}");
+            }
+        }
+
+
 
         #endregion
 
@@ -239,9 +281,5 @@ namespace CorredoresF1app_AGGP.ViewModel
         public ICommand Crearcommand => new Command(async () => await InsertarArea());
 
         #endregion
-
-
-
-
     }
 }

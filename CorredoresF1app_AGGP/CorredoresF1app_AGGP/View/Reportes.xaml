@@ -106,10 +106,11 @@
                                                FontSize="18"
                                                TextColor="#35424a"
                                                HorizontalOptions="StartAndExpand" />
-                                    <Label Text="{Binding Nombre}"
-                                           FontSize="18"
-                                           TextColor="Black"
-                                           HorizontalOptions="StartAndExpand"/>
+                                    <Label Text="xd"
+                                               FontSize="18"
+                                               TextColor="Black"
+                                               HorizontalOptions="StartAndExpand"/>
+
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
