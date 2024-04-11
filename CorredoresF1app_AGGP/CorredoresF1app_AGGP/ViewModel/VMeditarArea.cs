@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using SkiaSharp;
 
 namespace CorredoresF1app_AGGP.ViewModel
 {
@@ -172,15 +173,55 @@ namespace CorredoresF1app_AGGP.ViewModel
                     var stream = await result.OpenReadAsync();
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        stream.CopyTo(ms);
+                        await RedimensionarImagen(stream, ms, 854, 480); // Redimensionar a 480p pendejo
                         Imagen = Convert.ToBase64String(ms.ToArray());
-
                     }
                 }
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
+
+        private async Task RedimensionarImagen(Stream imagenOriginal, Stream imagenRedimensionada, int ancho, int alto)
+        {
+            try
+            {
+                using (SKBitmap bitmap = SKBitmap.Decode(imagenOriginal))
+                {
+                    int nuevoAncho, nuevoAlto;
+
+                    if (bitmap.Width > bitmap.Height)
+                    {
+                        nuevoAncho = ancho;
+                        nuevoAlto = bitmap.Height * ancho / bitmap.Width;
+                    }
+                    else
+                    {
+                        nuevoAlto = alto;
+                        nuevoAncho = bitmap.Width * alto / bitmap.Height;
+                    }
+
+                    using (SKBitmap resizedBitmap = bitmap.Resize(new SKImageInfo(nuevoAncho, nuevoAlto), SKFilterQuality.Medium)) // Reducción de calidad a Medium aynomastranquilon
+                    {
+                        using (SKImage imageResized = SKImage.FromBitmap(resizedBitmap))
+                        {
+                            using (SKData data = imageResized.Encode())
+                            {
+                                using (Stream output = data.AsStream())
+                                {
+                                    await output.CopyToAsync(imagenRedimensionada);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al redimensionar la imagen: {ex.Message}");
             }
         }
 
