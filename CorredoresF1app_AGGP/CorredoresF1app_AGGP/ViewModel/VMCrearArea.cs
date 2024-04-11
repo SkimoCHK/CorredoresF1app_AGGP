@@ -247,7 +247,7 @@ namespace CorredoresF1app_AGGP.ViewModel
                         nuevoAncho = bitmap.Width * alto / bitmap.Height;
                     }
 
-                    using (SKBitmap resizedBitmap = bitmap.Resize(new SKImageInfo(nuevoAncho, nuevoAlto), SKFilterQuality.High))
+                    using (SKBitmap resizedBitmap = bitmap.Resize(new SKImageInfo(nuevoAncho, nuevoAlto), SKFilterQuality.Medium)) // Reducción de calidad a Medium
                     {
                         using (SKImage imageResized = SKImage.FromBitmap(resizedBitmap))
                         {
@@ -267,8 +267,6 @@ namespace CorredoresF1app_AGGP.ViewModel
                 Console.WriteLine($"Error al redimensionar la imagen: {ex.Message}");
             }
         }
-
-
 
         #endregion
 
