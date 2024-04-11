@@ -22,6 +22,7 @@ namespace CorredoresF1app_AGGP.ViewModel
         private string _Id;
         private string _Nombre;
         private string _Imagen;
+
         private ElectroValvula _Valvula;
         private SensorHumedad _Sensor;
         ObservableCollection<ElectroValvula> _listaValvulas;
@@ -150,8 +151,8 @@ namespace CorredoresF1app_AGGP.ViewModel
             Id = area.id;
             Nombre = area.Nombre;
             Imagen = area.Imagen;
-            Valvula = area.electroValvula;
-            Sensor = area.sensorHumedad;
+            Valvula = area.valvula;
+            Sensor = area.SensorHumedad;
             VerSensores = false;
             VerActuadores = false;
             ObtenerValvulas();

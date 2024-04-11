@@ -97,25 +97,19 @@
                     <!--<Frame Grid.Column="0" Grid.Row="7" HeightRequest="1" WidthRequest="3" BackgroundColor="Transparent" BorderColor="#5f765f" HasShadow="False" Grid.ColumnSpan="3" Grid.RowSpan="1"/>-->
 
                 </Grid>
-                <ListView ItemsSource="{Binding ListaAreas}" x:Name="statusAreas" VerticalOptions="FillAndExpand"  BackgroundColor="Transparent">
-                    <ListView.ItemTemplate>
+                <CollectionView ItemsSource="{Binding ListaAreas}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                <StackLayout TranslationX="50" Padding="10" BackgroundColor="White" Margin="5,0,5,10">
-                                    <Label Text="{Binding Nombre}"
-                                               FontSize="18"
-                                               TextColor="#35424a"
-                                               HorizontalOptions="StartAndExpand" />
-                                    <Label Text="xd"
-                                               FontSize="18"
-                                               TextColor="Black"
-                                               HorizontalOptions="StartAndExpand"/>
-
-                                </StackLayout>
-                            </ViewCell>
+                            <StackLayout TranslationX="50" Padding="10" BackgroundColor="White" Margin="5,0,5,10">
+                                <Grid>
+                                    <Label Text="{Binding Nombre}" FontSize="18" TextColor="#35424a" HorizontalOptions="StartAndExpand" />
+                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding STATUS}" FontSize="16" TextColor="Black" HorizontalOptions="StartAndExpand" />
+                                </Grid>
+                            </StackLayout>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -17,6 +17,7 @@ namespace CorredoresF1app_AGGP.ViewModel
         #region VARIABLES
         private double _porcentaje;
         private ObservableCollection<Area> _listaAreas;
+       
         #endregion
 
         #region CONSTRUCTOR
@@ -75,11 +76,14 @@ namespace CorredoresF1app_AGGP.ViewModel
             {
                 var content = await response.Content.ReadAsStringAsync();
                 ListaAreas = JsonConvert.DeserializeObject<ObservableCollection<Area>>(content);
+
             }
             else
             {
                 await DisplayAlert("Mensaje", "Error al cargar la lista de areas", "Ok");
             }
+            
+
         }
         #endregion
 

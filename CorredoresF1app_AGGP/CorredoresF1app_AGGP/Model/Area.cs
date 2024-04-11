@@ -2,29 +2,34 @@
 using CorredoresF1app_AGGP.Model;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace CorredoresF1app_AGGP.Model
 {
     public class Area
     {
+
+
         public string id { get; set; } = string.Empty;
 
         public string Nombre { get; set; } = string.Empty;
 
+        public string Imagen { get; set; } = string.Empty;
+
         public string IdSensor { get; set; } = string.Empty;
 
-        public SensorHumedad sensorHumedad { get; set; } = null;
+        public SensorHumedad SensorHumedad { get; set; }
+
 
         public string IdValvula { get; set; } = string.Empty;
 
-        public ElectroValvula electroValvula { get; set; } = null;
-        public string EstadoElectroValvula => electroValvula.Abierta ? "ON" : "OFF";
+        public ElectroValvula valvula { get; set; }
 
-
-        public string Imagen { get; set; } = string.Empty;
+        public string STATUS {  get; set; } = string.Empty;
 
         public List<RiegoEvent> HistorialRiego { get; set; } = new List<RiegoEvent>();
     }
+
     public class AreaDTO
     {
 
@@ -38,4 +43,13 @@ namespace CorredoresF1app_AGGP.Model
 
 
     }
+
+    public class AreaStatus
+    {
+        public string id { get; set; } = string.Empty;
+        public string Nombre { get; set; } = string.Empty;
+        public string EstadoElectroValvulaText { get; set; } = string.Empty;
+
+    }
+
 }
