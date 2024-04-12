@@ -61,7 +61,7 @@ namespace CorredoresF1app_AGGP.ViewModel
         public async Task ObtenerLista()
         {
             //http://www.aquasmart.somee.com/api/Area
-            Uri RequestUri = new Uri("http://www.aquasmartt.somee.com/api/Area");
+            Uri RequestUri = new Uri("http://www.aquasmartx.somee.com/api/Area");
             var client = new HttpClient();
             var response = await client.GetAsync(RequestUri);
 

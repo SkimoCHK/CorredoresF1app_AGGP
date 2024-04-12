@@ -50,7 +50,7 @@ namespace CorredoresF1app_AGGP.ViewModel
         #region PROCESOS
         public async Task ObtenerPorcentaje()
         {
-            Uri RequestUri = new Uri("http://www.aquasmartt.somee.com/api/ElectroValvula/status");
+            Uri RequestUri = new Uri("http://www.aquasmartx.somee.com/api/ElectroValvula/status");
             var client = new HttpClient();
             var response = await client.GetAsync(RequestUri);
             if (response.IsSuccessStatusCode)
@@ -68,7 +68,7 @@ namespace CorredoresF1app_AGGP.ViewModel
         public async Task ObtenerLista()
         {
             //http://www.aquasmart.somee.com/api/Area
-            Uri RequestUri = new Uri("http://www.aquasmartt.somee.com/api/Area/obtener-areas");
+            Uri RequestUri = new Uri("http://www.aquasmartx.somee.com/api/Area/obtener-areas");
             var client = new HttpClient();
             var response = await client.GetAsync(RequestUri);
 
