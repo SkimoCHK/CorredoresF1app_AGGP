@@ -314,10 +314,7 @@ namespace CorredoresF1app_AGGP.ViewModel
             Navigation.PopAsync();
         }
 
-        public async Task Historial(Area area)
-        {
-            await Navigation.PushAsync(new HistorialRiego(_Area));
-        }
+
 
 
         #endregion
@@ -328,7 +325,6 @@ namespace CorredoresF1app_AGGP.ViewModel
         public ICommand MostrarSensoresCommand => new Command(MostrarSensores);
         public ICommand MostrarActuadoresCommand => new Command(MostrarActuadores);
         public ICommand Crearcommand => new Command(async () => await EditarArea());
-        public ICommand Historialcommand => new Command<Area>(async (h) => await Historial(h));
         public ICommand Deletecommand => new Command(async () => await Eliminar());
 
         #endregion

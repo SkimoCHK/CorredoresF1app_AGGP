@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CorredoresF1app_AGGP.View.Intermedio"
+             BackgroundColor="White" NavigationPage.HasBackButton="True" NavigationPage.IconColor="Black">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Button Text="Configuración"
+                    WidthRequest="280"
+                    BackgroundColor="#5F765F"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    Margin="0,0,0,50"
+                        Command="{Binding Editarcommand}"
+                    CornerRadius="10"></Button>
+                <Button Text="Historial"
+                    WidthRequest="280"
+                    BackgroundColor="#5F765F"
+                    Opacity="0.7"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                        Command="{Binding Historialcommand}"
+                    CornerRadius="10"
+                   
+                    />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

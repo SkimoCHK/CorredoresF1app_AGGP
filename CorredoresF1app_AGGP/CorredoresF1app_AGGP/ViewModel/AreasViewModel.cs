@@ -84,16 +84,16 @@ namespace CorredoresF1app_AGGP.ViewModel
             await Navigation.PushAsync(new CrearArea());
         }
 
-        public async Task EditarArea(Area area)
+        public async Task Intermedio(Area area)
         {
-            await Navigation.PushAsync(new EditarArea(area));
+            await Navigation.PushAsync(new Intermedio(area));
         }
 
         #endregion
 
         #region COMANDOS
         public ICommand AgregarJardinCommand => new Command(async () => await CrearAreas());
-        public ICommand VerDetalleCommand => new Command<Area>(async (a) => await EditarArea(a));
+        public ICommand VerDetalleCommand => new Command<Area>(async (a) => await Intermedio(a));
         #endregion
 
     }
