@@ -46,7 +46,7 @@ namespace CorredoresF1app_AGGP.ViewModel
         #region PROCESOS
         public async Task ObtenerHistorial()
         {
-            Uri RequestUri = new Uri($"http://www.aquasmart.somee.com/api/Area/obtener-historial{_area.id}");
+            Uri RequestUri = new Uri($"http://www.aquasmartt.somee.com/api/Area/obtener-historial{_area.id}");
             var client = new HttpClient();
             var response = await client.GetAsync(RequestUri);
             if (response.IsSuccessStatusCode)

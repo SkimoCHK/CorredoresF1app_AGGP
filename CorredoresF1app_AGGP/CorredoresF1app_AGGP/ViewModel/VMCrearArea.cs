@@ -119,7 +119,7 @@ namespace CorredoresF1app_AGGP.ViewModel
         #region PROCESOS
         public async Task ObtenerValvulas()
         {
-            Uri RequestUri = new Uri("http://www.aquasmart.somee.com/api/ElectroValvula");
+            Uri RequestUri = new Uri("http://www.aquasmartt.somee.com/api/ElectroValvula");
             var client = new HttpClient();
             var response = await client.GetAsync(RequestUri);
 
@@ -135,7 +135,7 @@ namespace CorredoresF1app_AGGP.ViewModel
         }
         public async Task ObtenerSensores()
         {
-            Uri RequestUri = new Uri("http://www.aquasmart.somee.com/api/SensorHumedad");
+            Uri RequestUri = new Uri("http://www.aquasmartt.somee.com/api/SensorHumedad");
             var client = new HttpClient();
             var response = await client.GetAsync(RequestUri);
             if (response.IsSuccessStatusCode)
@@ -164,7 +164,7 @@ namespace CorredoresF1app_AGGP.ViewModel
                 var json = JsonConvert.SerializeObject(nuevaArea);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var requestUri = "http://www.aquasmart.somee.com/api/Area";
+                var requestUri = "http://www.aquasmartt.somee.com/api/Area";
 
                 var client = new HttpClient();
                 var response = await client.PostAsync(requestUri, content);
