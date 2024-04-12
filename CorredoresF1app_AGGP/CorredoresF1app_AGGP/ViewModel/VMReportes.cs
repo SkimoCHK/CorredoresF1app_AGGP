@@ -76,7 +76,7 @@ namespace CorredoresF1app_AGGP.ViewModel
             {
                 var content = await response.Content.ReadAsStringAsync();
                 ListaAreas = JsonConvert.DeserializeObject<ObservableCollection<Area>>(content);
-
+                //uchalamama
             }
             else
             {
