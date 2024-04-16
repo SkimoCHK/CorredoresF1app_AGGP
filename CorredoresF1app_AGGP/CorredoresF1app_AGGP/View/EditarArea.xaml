@@ -25,6 +25,29 @@
                x:Name="NombreAreaEntry"
                Text="{Binding Nombre}" PlaceholderColor="Black"/>
 
+                <Frame BorderColor="Black"
+                       CornerRadius="25"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       WidthRequest="200"
+                       Margin="0,0,0,20">
+                    <StackLayout>
+                        <Label Text="E s t a d o   a c t u a l"
+                               HorizontalOptions="Center"
+                               TextColor="#35424a"
+                               x:Name="lblStatus"/>
+                        <StackLayout>
+                            <Switch HorizontalOptions="Center"
+                                    OnColor="#35424a"
+                                    ThumbColor="Black"
+                                    x:Name="sw0"
+                                    Toggled="sw0_Toggled">
+                                
+                            </Switch>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
                 <Label Text="Imagen actual"
                FontSize="18"
                TextColor="#35424a"
