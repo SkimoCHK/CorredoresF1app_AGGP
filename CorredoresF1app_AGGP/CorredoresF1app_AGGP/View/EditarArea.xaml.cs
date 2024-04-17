@@ -10,6 +10,8 @@ using Xamarin.Forms.Xaml;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 
 namespace CorredoresF1app_AGGP.View
@@ -17,14 +19,7 @@ namespace CorredoresF1app_AGGP.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EditarArea : ContentPage
 	{
-		string server;
-		Int32 port;
-		TcpClient tcpClient;
-		Byte[] bytes;
-		NetworkStream stream;
-		string entrada = "";
-		bool conectando= false;
-		bool conectado = false;
+	
 		
 
 		public EditarArea(Area area)
@@ -32,55 +27,39 @@ namespace CorredoresF1app_AGGP.View
 			InitializeComponent ();
 			BindingContext = new VMeditarArea(Navigation, area);
 
-			server = "192.168.137.112";
-			port = 8888;
-
-			sw0.IsEnabled = false;
-
-			Device.StartTimer(TimeSpan.FromMilliseconds(500), () =>
-			{
-				if (conectando == false)
-				{
-					_ = IniciarConecte();
-				}
-				if (conectado == true)
-				{
-					sw0.IsEnabled = true;
-				}
-
-				return true;
-			});
-
-
-
         }
-
-		public async Task IniciarConecte()
-		{
-			lblStatus.Text = "Conectando...";
-			tcpClient = new TcpClient();
-			conectando = true;
-			await tcpClient.ConnectAsync(server,port);
-			stream = tcpClient.GetStream();
-			lblStatus.Text = "Conectado";
-		}
-		int a = 0;
-		string message;
-        private void sw0_Toggled(object sender, ToggledEventArgs e)
+			
+        private async void sw0_Toggled(object sender, ToggledEventArgs e)
         {
-			if (sw0.IsToggled)
-			{
-				a = 1;
-			}
-			else
-			{
-				a = 0;
-			}
-			message = "0" + a + Environment.NewLine;
-			Console.WriteLine("Valvula:" + message);
+            bool isOn = sw0.IsToggled;
 
-			bytes = System.Text.Encoding.ASCII.GetBytes(message);
-			stream.Write(bytes, 0, bytes.Length);
+            string url = "http://aquasmartx.somee.com/api/Area/actualizar-status"; // Replace with your actual API URL
+            var client = new HttpClient();
+
+            AreaUpdateDTO updateDTO = new AreaUpdateDTO
+            {
+                id = "6619531d7c202c5b37e47a31", // Replace with the ID of the area you want to control
+                Status = isOn
+            };
+
+            try
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(updateDTO), Encoding.UTF8, "application/json");
+                var response = await client.PutAsync(url, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Show success message (optional)
+                }
+                else
+                {
+                    // Handle error (optional)
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions (optional)
+            }
         }
     }
 }

@@ -22,6 +22,7 @@
                    HorizontalOptions="Start" VerticalOptions="Center" Margin="10,0,0,0"/>
 
                 <Entry Placeholder="Your email address"
+                      Text="{Binding Email}" 
                    FontSize="16"
                    PlaceholderColor="Black"
                    TextColor="Black"
@@ -38,6 +39,7 @@
                 </StackLayout>
 
                 <Entry Placeholder="Mostrar contraseña"
+                       Text="{Binding Password}"
                    FontSize="16"
                    PlaceholderColor="Gray"
                    TextColor="Black"
@@ -49,7 +51,7 @@
                     CornerRadius="10"
                     Margin="20,10,20,0"
                     TextColor="White"
-                    Command="{Binding Loginu}"
+                    Command="{Binding RegisterCommand}"
                     FontAttributes="Bold"
                     TextTransform="None"
                     FontSize="16"

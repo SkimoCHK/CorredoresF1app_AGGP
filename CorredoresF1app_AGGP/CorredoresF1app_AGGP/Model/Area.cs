@@ -28,6 +28,7 @@ namespace CorredoresF1app_AGGP.Model
         public string STATUS {  get; set; } = string.Empty;
 
         public List<RiegoEvent> HistorialRiego { get; set; } = new List<RiegoEvent>();
+        public bool Modo {  get; set; }
     }
 
     public class AreaDTO
@@ -52,4 +53,10 @@ namespace CorredoresF1app_AGGP.Model
 
     }
 
+    public class AreaUpdateDTO
+    {
+        public string id { get; set; } = string.Empty;
+        public bool Status { get; set; }
+
+    }
 }
